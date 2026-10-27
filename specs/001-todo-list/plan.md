@@ -1,0 +1,100 @@
+# Implementation Plan: Curso-PSWE-07
+
+**Branch**: `001-todo-list` | **Date**: 2026-10-26 | **Spec**: `/specs/001-todo-list/spec.md`
+
+**Input**: Feature specification from `/specs/001-todo-list/spec.md`
+
+## Summary
+
+Build a single-user to-do list app with a list screen and a detail/edit screen for creating, filtering, updating, completing, and deleting tasks. The implementation will use a minimal client-side web stack with local persistence so tasks remain available after app close/reopen without introducing sync, users, or backend services.
+
+## Technical Context
+
+**Language/Version**: TypeScript 5.x + React 18 (chosen for this plan; framework is still subject to implementation selection)
+
+**Primary Dependencies**: React, Vite, testing-library/react, Vitest, localStorage
+
+**Storage**: Browser localStorage as the persistence layer for the task collection; no remote database is required.
+
+**Testing**: Vitest + @testing-library/react + jsdom for unit and interaction tests
+
+**Target Platform**: Responsive web app for desktop and mobile browser layouts
+
+**Project Type**: web-app
+
+**Performance Goals**: Fast, local task filtering for small task collections; no network latency or backend bottleneck
+
+**Constraints**: Single-user app; no accounts or sync; 44x44 px controls; 4.5:1 normal text contrast and 3:1 large text contrast; offline-capable local storage
+
+**Scale/Scope**: One local task list, two screens, no categories, no dates, no priorities, and no search features
+
+## Constitution Check
+
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+
+### Principle I. SIMPLICITY FIRST (YAGNI)
+- PASS: The feature only requires a single-user task list with two screens and local persistence. No account, sync, categories, or priority features are included.
+
+### Principle II. SIMPLE, CLEAR DESIGN
+- PASS: The implementation will separate UI, task state logic, and storage adapter responsibilities to keep behavior understandable and testable.
+
+### Principle III. STRUCTURED ARCHITECTURE
+- PASS: A UI layer will render screens, a task-domain layer will validate and manage task state, and a local storage adapter will persist the task collection.
+
+### Principle IV. TEST-DRIVEN DEVELOPMENT (NON-NEGOTIABLE)
+- PASS: Task behaviors and validation scenarios will be tested before implementing the persistence and UI logic.
+
+### Principle V. SPEC IS THE SOURCE OF TRUTH
+- PASS: The plan derives directly from FR-001 through FR-020 and the user stories in the feature spec.
+
+### Principle VI. DEPENDENCIES AND QUALITY
+- PASS: The app will prefer browser-native storage and a minimal front-end stack without introducing unnecessary dependencies.
+
+## Project Structure
+
+### Documentation (this feature)
+
+```text
+specs/001-todo-list/
+├── plan.md              # This file (/speckit-plan command output)
+├── research.md          # Phase 0 output (/speckit-plan command)
+├── data-model.md        # Phase 1 output (/speckit-plan command)
+├── quickstart.md        # Phase 1 output (/speckit-plan command)
+├── contracts/           # Phase 1 output (/speckit-plan command)
+└── tasks.md             # Phase 2 output (/speckit-tasks command - NOT created by /speckit-plan)
+```
+
+### Source Code (repository root)
+
+```text
+src/
+├── app/
+│   ├── routes/
+│   └── screens/
+├── features/
+│   └── tasks/
+│       ├── components/
+│       ├── hooks/
+│       ├── models/
+│       ├── validation/
+│       └── filters/
+├── lib/
+│   └── storage/
+├── styles/
+└── app.tsx
+
+tests/
+├── unit/
+│   ├── task-validation.test.ts
+│   └── task-store.test.ts
+├── integration/
+│   └── task-flow.test.ts
+└── e2e/
+    └── task-list.spec.ts
+```
+
+**Structure Decision**: A single frontend app is sufficient because the requirement is for one local task list with no backend or synchronization layer. The app will keep UI, task logic, and storage concerns separate under `src/features/tasks` and `src/lib/storage` while the tests are split between unit, integration, and end-to-end coverage.
+
+## Complexity Tracking
+
+No constitution violations are expected for this feature. The app remains intentionally narrow and uses the simplest architecture that satisfies FR-001 through FR-020.
