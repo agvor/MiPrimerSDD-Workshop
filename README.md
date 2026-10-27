@@ -1,46 +1,32 @@
-# Taller de Spec-Driven Development (SDD)
+# React + TypeScript + Vite
 
-## Objetivo
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
-Analizar y mejorar una especificación de requisitos elaborada con asistencia de inteligencia artificial.
+Currently, two official plugins are available:
 
-El objetivo no es aceptar automáticamente lo que propone la IA, sino evaluar la calidad de los requisitos, identificar ambigüedades y justificar las decisiones de mejora.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Caso de estudio
+## React Compiler
 
-Una aplicación simple que gestiona tareas personales.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-La especificación inicial se encuentra en `requirements/spec-inicial.md`.
+## Expanding the Oxlint configuration
 
-## Actividades
+If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
 
-1. Leer la especificación completa.
-2. Identificar al menos tres ambigüedades, supuestos o decisiones pendientes.
-3. Proponer mejoras a los criterios de aceptación.
-4. Utilizar IA para explorar alternativas y evaluar críticamente sus propuestas.
-5. Documentar las decisiones finales y justificarlas.
+```json
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "oxc"],
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+```
 
-## Entregables
-
-- Una especificación revisada.
-- Al menos tres decisiones de mejora justificadas.
-- Una reflexión breve sobre las limitaciones de utilizar IA para definir requisitos.
-
-## Principio de trabajo
-
-Cada cambio debe responder a una necesidad identificada y contar con una justificación.
-
-No es necesario implementar la aplicación en este taller.
-
-## Estructura del repositorio
-
-- `requirements/`: especificación inicial.
-- `activities/`: guía de trabajo.
-- `deliverables/`: resultados de los estudiantes.
-
-## Herramientas Spec Kit
-
-Los comandos de soporte de Spec Kit usan Python 3 y funcionan en Linux, WSL y Windows.
-Desde la raíz del repositorio, ejecútalos mediante los scripts Bash de `.specify/scripts/bash/`;
-por ejemplo, `bash .specify/scripts/bash/resolve-template.sh constitution-template --json`.
-PyYAML solo es necesario cuando se resuelven plantillas de presets que declaran `preset.yml`.
+See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
