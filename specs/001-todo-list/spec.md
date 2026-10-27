@@ -43,7 +43,7 @@ As a user, I want to review, edit, complete, restore, or delete a task so its de
 1. **Given** a task is open, **When** the detail screen is displayed, **Then** it shows the prominent title, description or muted “No description” text, a Done or Pending status label, and a back control.
 2. **Given** a task is pending, **When** the user chooses Mark as done, **Then** it becomes done and the available action changes to Mark as not done.
 3. **Given** a task is done, **When** the user chooses Mark as not done, **Then** it becomes pending and the available action changes to Mark as done.
-4. **Given** the user chooses Edit, **When** the edit form opens, **Then** it contains the current title and description and offers Save and Cancel.
+4. **Given** the user chooses Edit on the detail screen, **When** the screen enters edit mode, **Then** it shows the reusable form with the current title and description and offers Save and Cancel.
 5. **Given** the user changes task fields, **When** they save with a non-empty title, **Then** the updated details are displayed; **When** they cancel, **Then** the unsaved changes are discarded.
 6. **Given** the user enters an empty or whitespace-only title, **When** they save, **Then** the task is not saved and a title-required validation message is shown.
 7. **Given** a task is open, **When** the user chooses Delete, **Then** a confirmation is requested before deletion; confirming removes the task and returns to the list, while canceling leaves the task unchanged.
@@ -106,6 +106,8 @@ As a user, I want my task list and changes to remain available after closing and
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
+
+SC-001, SC-002, SC-004, and SC-006 are post-launch usability outcome targets, not release acceptance gates. Evaluate them with participants who have not previously used the application. Give each participant the specified task without moderator prompts; record task completion and elapsed time. For SC-006, ask participants whether each named interface element is clear and count “yes” responses. Report participant counts and numerators/denominators with the results.
 
 - **SC-001**: At least 90% of first-time users can add a task and open its details without assistance within two minutes.
 - **SC-002**: At least 90% of users can change a task's status and find it with the corresponding filter without assistance within one minute.

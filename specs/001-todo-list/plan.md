@@ -6,13 +6,13 @@
 
 ## Summary
 
-Build a single-user to-do list app with a list screen and a detail/edit screen for creating, filtering, updating, completing, and deleting tasks. The implementation will use a minimal client-side web stack with local persistence so tasks remain available after app close/reopen without introducing sync, users, or backend services.
+Build a single-user to-do list app with a list screen and a detail screen. Editing is a mode of the detail screen, not a third screen. The implementation will use a minimal client-side web stack with local persistence so tasks remain available after app close/reopen without introducing sync, users, or backend services.
 
 ## Technical Context
 
 **Language/Version**: TypeScript 5.x + React 18 with Vite
 
-**Primary Dependencies**: React, Vite, testing-library/react, Vitest, localStorage
+**Primary Dependencies**: React, Vite, testing-library/react, Vitest, ESLint (development-only linting), localStorage
 
 **Storage**: Browser localStorage as the persistence layer for the task collection; no remote database is required.
 
@@ -45,10 +45,10 @@ Build a single-user to-do list app with a list screen and a detail/edit screen f
 - PASS: Task behaviors and validation scenarios will be tested before implementing the persistence and UI logic.
 
 ### Principle V. SPEC IS THE SOURCE OF TRUTH
-- PASS: The plan derives directly from FR-001 through FR-020 and the user stories in the feature spec.
+- PASS: The plan derives directly from FR-001 through FR-021 and the user stories in the feature spec.
 
 ### Principle VI. DEPENDENCIES AND QUALITY
-- PASS: The app will prefer browser-native storage and a minimal front-end stack without introducing unnecessary dependencies.
+- PASS: The app will prefer browser-native storage. ESLint is a development-only dependency required for the constitution's lint quality gate; linting, tests, and build are required completion checks.
 
 ## Project Structure
 
@@ -93,8 +93,8 @@ tests/
 │   └── task-persistence.test.tsx
 ```
 
-**Structure Decision**: A single frontend app is sufficient because the requirement is for one local task list with no backend or synchronization layer. The app will keep UI, task logic, and storage concerns separate under `src/features/tasks` and `src/lib/storage`, with behavior covered by unit and integration tests.
+**Structure Decision**: A single frontend app is sufficient because the requirement is for one local task list with no backend or synchronization layer. It has two screens; the task detail screen switches between read and edit modes. The app will keep UI, task logic, and storage concerns separate under `src/features/tasks` and `src/lib/storage`, with behavior covered by unit and integration tests.
 
 ## Complexity Tracking
 
-No constitution violations are expected for this feature. The app remains intentionally narrow and uses the simplest architecture that satisfies FR-001 through FR-020.
+No constitution violations are expected for this feature. The app remains intentionally narrow and uses the simplest architecture that satisfies FR-001 through FR-021.

@@ -12,7 +12,7 @@
 
 **Purpose**: Initialize the planned client-side React application and its dependencies.
 
-- [ ] T001 Initialize the Vite React/TypeScript application and its npm scripts and dependencies in `package.json`, `index.html`, `src/main.tsx`, and the root TypeScript configuration files
+- [ ] T001 Initialize the Vite React/TypeScript application, npm scripts, and required dependencies; configure the ESLint lint script in `package.json`, `eslint.config.js`, `index.html`, `src/main.tsx`, and the root TypeScript configuration files
 
 ---
 
@@ -67,7 +67,7 @@
 
 - [ ] T015 [US2] Implement task update, completion toggle, and removal operations in `src/features/tasks/hooks/use-tasks.ts`
 - [ ] T016 [US2] Implement the task detail screen with a back control, prominent title, optional-description placeholder, status label, Edit action, status-toggle label, and Delete action in `src/app/screens/task-detail-screen.tsx`
-- [ ] T017 [P] [US2] Implement the edit screen using the reusable form, prefilled title and description, preservation of valid entered titles, Save, and Cancel behavior in `src/app/screens/task-edit-screen.tsx`
+- [ ] T017 [US2] Add edit mode to the task detail screen using the reusable form, prefilled title and description, preservation of valid entered titles, Save, and Cancel behavior in `src/app/screens/task-detail-screen.tsx`
 - [ ] T018 [US2] Implement a warning-colored delete confirmation with confirm and cancel behavior in `src/features/tasks/components/delete-task-dialog.tsx` and connect it to `src/app/screens/task-detail-screen.tsx`
 
 **Checkpoint**: Task detail and maintenance behaviors are independently testable against the task list created in User Story 1.
@@ -98,8 +98,8 @@
 
 **Purpose**: Align the validation guide with the finished application and verify the complete feature.
 
-- [ ] T023 Update the setup commands and manual acceptance checks matching US1 scenarios 7-9 for app/window naming, visual hierarchy, 375x667 and 1440x900 layouts without horizontal scrolling, contrast, and 44x44 px targets, plus persistence, malformed-storage handling, and feature validation steps in `specs/001-todo-list/quickstart.md`
-- [ ] T024 Run the configured test and build scripts from `package.json` and complete the validation scenarios in `specs/001-todo-list/quickstart.md`, resolving any failures
+- [ ] T023 Update setup commands and document the lint check alongside manual acceptance checks matching US1 scenarios 7-9 for app/window naming, visual hierarchy, 375x667 and 1440x900 layouts without horizontal scrolling, contrast, and 44x44 px targets, plus persistence, malformed-storage handling, and feature validation steps in `specs/001-todo-list/quickstart.md`
+- [ ] T024 Run the configured lint, test, and build scripts from `package.json` and complete the validation scenarios in `specs/001-todo-list/quickstart.md`, resolving any failures
 
 ---
 
@@ -128,7 +128,7 @@
 
 - **Foundational**: T002 and T003 can run in parallel after T001; T004 follows T003.
 - **US1**: T005 and T006 can run in parallel. After both tests are written and confirmed failing, T007 and T008 can be implemented in parallel; T009 follows both.
-- **US2**: T013 and T014 can run in parallel. After the tests, T016 and T017 can be implemented in parallel once T015 is complete; T018 follows T016.
+- **US2**: T013 and T014 can run in parallel. After T015, implement T016; then T017 adds edit mode and T018 connects delete confirmation to the detail screen.
 - **US3**: T019 and T020 can be authored in parallel after US2. T021 follows the repository unit tests, and T022 follows T021 and the persistence acceptance tests.
 
 ## Parallel Examples
@@ -144,7 +144,7 @@ After both tests are written and confirmed failing, implement T007 and T008 in p
 
 ```text
 Run T013 and T014 in parallel to establish acceptance and task-action unit coverage.
-After T015, implement T016 and T017 in parallel; complete delete-dialog integration in T018 after T016.
+After T015, implement T016; then add edit mode in T017 and complete delete-dialog integration in T018.
 ```
 
 ### User Story 3
@@ -167,4 +167,4 @@ Implement T021 after T019, then wire the tested repository and error feedback in
 1. Complete US1 for a usable task list.
 2. Complete US2 for editing, completion changes, and confirmed deletion.
 3. Complete US3 to persist all task operations and surface storage errors.
-4. Complete Polish and run the test, build, and quickstart validations.
+4. Complete Polish and run the lint, test, build, and quickstart validations.
