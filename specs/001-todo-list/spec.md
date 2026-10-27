@@ -26,8 +26,9 @@ As a user, I want to add tasks and find them in a list so I can keep track of th
 4. **Given** the list contains pending and done tasks, **When** the user selects All, Pending, or Done, **Then** the list shows all tasks, only pending tasks, or only done tasks, respectively, and highlights the active filter.
 5. **Given** no tasks match the selected filter, **When** the filtered list is shown, **Then** a friendly empty state explains that there are no matching tasks.
 6. **Given** a task is done, **When** it appears in the list, **Then** its title is struck through and muted, and a status indicator remains visible.
-7. **Given** the application is viewed on a mobile or desktop screen, **When** either screen is displayed, **Then** the app name appears in the list header and application/window title, the layout remains usable, and interactive targets meet the specified size and contrast requirements.
+7. **Given** the application is viewed at a 375x667 mobile viewport or a 1440x900 desktop viewport, **When** either screen is displayed, **Then** the app name appears in the list header and application/window title, the layout remains usable without horizontal scrolling, and all required actions remain available.
 8. **Given** either screen is displayed, **When** the user views its content, **Then** the light background, single sans-serif font, single accent color for primary actions and the active filter, and larger, bolder titles are consistently applied.
+9. **Given** either screen is displayed, **When** the user measures its text and interactive targets, **Then** normal-sized text has at least 4.5:1 contrast, large text has at least 3:1 contrast, and interactive targets measure at least 44x44 px.
 
 ### User Story 2 - Review and maintain a task (Priority: P1)
 
@@ -60,6 +61,7 @@ As a user, I want my task list and changes to remain available after closing and
 1. **Given** the user has added or changed tasks, **When** the application is closed and reopened, **Then** the latest saved titles, descriptions, and statuses are present.
 2. **Given** the user confirmed deletion of a task, **When** the application is closed and reopened, **Then** the deleted task remains absent.
 3. **Given** a task change cannot be saved, **When** the save fails, **Then** the user is told it was not saved and is not shown a success result.
+4. **Given** saved task data is malformed or the stored collection cannot be read, **When** the application loads, **Then** it reports that the tasks could not be loaded, preserves the stored value, and does not present an empty list or allow task changes to overwrite the unreadable data.
 
 ### Edge Cases
 
@@ -68,7 +70,8 @@ As a user, I want my task list and changes to remain available after closing and
 - Canceling the delete confirmation leaves the selected task unchanged.
 - A filter with no matching tasks shows an empty state without implying that tasks were deleted.
 - If a task cannot be saved, the application clearly reports the failure and does not indicate that the change succeeded.
-- On narrow and wide screens, the two screens remain usable and controls continue to meet the minimum target size.
+- If saved task data is malformed or cannot be read, the application reports a load error, preserves the stored value, and does not treat the collection as empty or allow writes that could overwrite it.
+- At 375x667 and 1440x900 viewports, the two screens remain usable without horizontal scrolling and controls continue to meet the minimum target size.
 
 ## Requirements *(mandatory)*
 
@@ -94,6 +97,7 @@ As a user, I want my task list and changes to remain available after closing and
 - **FR-018**: Text MUST meet a contrast ratio of at least 4.5:1 for normal-sized text and 3:1 for large text; interactive targets MUST be at least 44x44 px.
 - **FR-019**: Both screens MUST adapt for mobile and desktop layouts while remaining usable.
 - **FR-020**: The application MUST NOT include accounts, categories, due dates, priorities, search, or synchronization.
+- **FR-021**: If the saved task collection cannot be read or fails validation, the application MUST report a load error, preserve the stored value, and prevent task changes from overwriting that data.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -107,7 +111,7 @@ As a user, I want my task list and changes to remain available after closing and
 - **SC-002**: At least 90% of users can change a task's status and find it with the corresponding filter without assistance within one minute.
 - **SC-003**: In all acceptance tests, every successfully saved addition, edit, status change, and deletion is reflected correctly after the application is closed and reopened.
 - **SC-004**: At least 90% of users can edit a task and complete or cancel a confirmed deletion without assistance within two minutes.
-- **SC-005**: Every interactive target measures at least 44x44 px, normal text has at least 4.5:1 contrast and large text at least 3:1, and the interface remains usable at mobile and desktop viewport sizes.
+- **SC-005**: At 375x667 and 1440x900 viewports, every interactive target measures at least 44x44 px, normal text has at least 4.5:1 contrast and large text at least 3:1, and both screens remain usable without horizontal scrolling.
 - **SC-006**: At least 90% of usability-test participants report that task status, the active filter, validation messages, and delete confirmation are clear.
 
 ## Assumptions
@@ -115,6 +119,6 @@ As a user, I want my task list and changes to remain available after closing and
 - The application serves one user's task list; accounts, sharing, and collaboration are out of scope.
 - Tasks are retained for the same application installation after normal close and reopen; cross-device access and synchronization are not required.
 - A newly created task is Pending.
-- Titles containing only whitespace are invalid; no further title or description length restrictions are introduced.
+- Titles containing only whitespace are invalid; valid titles are saved as entered, including surrounding whitespace. No further title or description length restrictions are introduced.
 - “Done” means complete and “Pending” means not complete.
 - The application includes only the two requested screens and the described task-management behaviors; features not requested are out of scope.

@@ -21,7 +21,7 @@
 **Purpose**: Establish shared test infrastructure and task/repository contracts needed by all stories.
 
 - [ ] T002 [P] Configure Vitest, jsdom, and Testing Library in `vite.config.ts` and `tests/setup.ts`
-- [ ] T003 [P] Define the `Task`, `TaskStatus`, and `TaskFilter` types in `src/features/tasks/models/task.ts` with a unique string id, a string title that "Must be non-empty after trimming whitespace.", an optional description that allows an empty string, a `pending` or `done` status defaulting to `pending`, and optional ISO timestamp strings for `createdAt` and `updatedAt`
+- [ ] T003 [P] Define the `Task`, `TaskStatus`, and `TaskFilter` types in `src/features/tasks/models/task.ts` with a unique string id, a string title that must be non-empty after trimming whitespace but preserves the entered value, an optional description that allows an empty string, a `pending` or `done` status defaulting to `pending`, and optional ISO timestamp strings for `createdAt` and `updatedAt`
 - [ ] T004 Define the replaceable task repository interface in `src/features/tasks/task-repository.ts` for loading and saving the full task collection
 
 **Checkpoint**: Shared task types, repository boundary, and test runner are ready before story implementation.
@@ -36,15 +36,15 @@
 
 ### Tests for User Story 1
 
-- [ ] T005 [P] [US1] Add unit tests for rejecting empty or whitespace-only titles and accepting trimmed non-empty titles in `tests/unit/task-validation.test.ts`
-- [ ] T006 [P] [US1] Add list acceptance tests for the no-task and no-match empty states, task creation, task-row opening, all three filters, active-filter indication, and completed-row styling in `tests/integration/task-list.test.tsx`
+- [ ] T005 [P] [US1] Add unit tests for rejecting empty or whitespace-only titles and accepting non-empty titles in `tests/unit/task-validation.test.ts`
+- [ ] T006 [P] [US1] Add list acceptance tests for the no-task and no-match empty states, task creation with title preservation, task-row opening, all three filters, active-filter indication, completed-row styling, app/window naming, light background, single font and accent color, and title hierarchy in `tests/integration/task-list.test.tsx`
 
 ### Implementation for User Story 1
 
 - [ ] T007 [US1] Implement required-title validation in `src/features/tasks/validation/task-validation.ts` so blank or whitespace-only titles are rejected with a user-facing validation message
 - [ ] T008 [US1] Implement the initial in-memory `TaskRepository` adapter in `src/features/tasks/in-memory-task-repository.ts` for the working list increment
 - [ ] T009 [US1] Implement task loading, creation with `pending` status, list filtering, and task selection in `src/features/tasks/hooks/use-tasks.ts`
-- [ ] T010 [US1] Implement the reusable add-task form with title validation and optional description in `src/features/tasks/components/task-form.tsx`
+- [ ] T010 [US1] Implement the reusable add-task form with title validation, preservation of valid entered titles, and optional description in `src/features/tasks/components/task-form.tsx`
 - [ ] T011 [US1] Implement the task list, visible Add task action, status indicators, All/Pending/Done filters, and distinct no-task/no-match empty states in `src/app/screens/task-list-screen.tsx`
 - [ ] T012 [US1] Wire the list and task-opening navigation, display “Curso-PSWE-07” in the list header and window title, and implement the light responsive visual system and specified contrast and 44x44 px target sizes in `src/app/app.tsx`, `src/styles/app.css`, and `index.html`
 
@@ -67,7 +67,7 @@
 
 - [ ] T015 [US2] Implement task update, completion toggle, and removal operations in `src/features/tasks/hooks/use-tasks.ts`
 - [ ] T016 [US2] Implement the task detail screen with a back control, prominent title, optional-description placeholder, status label, Edit action, status-toggle label, and Delete action in `src/app/screens/task-detail-screen.tsx`
-- [ ] T017 [P] [US2] Implement the edit screen using the reusable form, prefilled title and description, Save, and Cancel behavior in `src/app/screens/task-edit-screen.tsx`
+- [ ] T017 [P] [US2] Implement the edit screen using the reusable form, prefilled title and description, preservation of valid entered titles, Save, and Cancel behavior in `src/app/screens/task-edit-screen.tsx`
 - [ ] T018 [US2] Implement a warning-colored delete confirmation with confirm and cancel behavior in `src/features/tasks/components/delete-task-dialog.tsx` and connect it to `src/app/screens/task-detail-screen.tsx`
 
 **Checkpoint**: Task detail and maintenance behaviors are independently testable against the task list created in User Story 1.
@@ -82,13 +82,13 @@
 
 ### Tests for User Story 3
 
-- [ ] T019 [P] [US3] Add local-storage repository unit tests for the `curso-pswe-07.tasks` key, full-collection writes, required task fields, unique ids, allowed statuses, and visible load/save failures in `tests/unit/task-store.test.ts`
-- [ ] T020 [P] [US3] Add persistence acceptance tests covering create, edit, status change, confirmed deletion, application reinitialization, and save failure in `tests/integration/task-persistence.test.tsx`
+- [ ] T019 [P] [US3] Add local-storage repository unit tests for the `curso-pswe-07.tasks` key, full-collection writes, required task fields, unique ids, allowed statuses, malformed or unreadable stored data without overwrite, and visible load/save failures in `tests/unit/task-store.test.ts`
+- [ ] T020 [P] [US3] Add persistence acceptance tests covering create, edit, status change, confirmed deletion, application reinitialization, save failure, and safe handling of malformed or unreadable stored data in `tests/integration/task-persistence.test.tsx`
 
 ### Implementation for User Story 3
 
-- [ ] T021 [US3] Implement the local-storage `TaskRepository` in `src/lib/storage/local-task-repository.ts` using key `curso-pswe-07.tasks`, validating stored collections and surfacing load/save errors
-- [ ] T022 [US3] Wire the local-storage repository into the application and task hook, replace the in-memory production default, and display failed-save errors without success feedback in `src/app/app.tsx` and `src/features/tasks/hooks/use-tasks.ts`
+- [ ] T021 [US3] Implement the local-storage `TaskRepository` in `src/lib/storage/local-task-repository.ts` using key `curso-pswe-07.tasks`, validating stored collections, preserving invalid or unreadable data without treating it as empty, and surfacing load/save errors
+- [ ] T022 [US3] Wire the local-storage repository into the application and task hook, replace the in-memory production default, display load/save errors without success feedback, and prevent task changes from overwriting data that failed to load in `src/app/app.tsx` and `src/features/tasks/hooks/use-tasks.ts`
 
 **Checkpoint**: The completed task flows retain their latest saved state across reinitialization and expose persistence errors clearly.
 
@@ -98,7 +98,7 @@
 
 **Purpose**: Align the validation guide with the finished application and verify the complete feature.
 
-- [ ] T023 Update the setup commands and manual responsive, contrast, target-size, persistence, and feature validation steps in `specs/001-todo-list/quickstart.md`
+- [ ] T023 Update the setup commands and manual acceptance checks matching US1 scenarios 7-9 for app/window naming, visual hierarchy, 375x667 and 1440x900 layouts without horizontal scrolling, contrast, and 44x44 px targets, plus persistence, malformed-storage handling, and feature validation steps in `specs/001-todo-list/quickstart.md`
 - [ ] T024 Run the configured test and build scripts from `package.json` and complete the validation scenarios in `specs/001-todo-list/quickstart.md`, resolving any failures
 
 ---

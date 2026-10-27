@@ -10,7 +10,7 @@ Build a single-user to-do list app with a list screen and a detail/edit screen f
 
 ## Technical Context
 
-**Language/Version**: TypeScript 5.x + React 18 (chosen for this plan; framework is still subject to implementation selection)
+**Language/Version**: TypeScript 5.x + React 18 with Vite
 
 **Primary Dependencies**: React, Vite, testing-library/react, Vitest, localStorage
 
@@ -22,7 +22,7 @@ Build a single-user to-do list app with a list screen and a detail/edit screen f
 
 **Project Type**: web-app
 
-**Performance Goals**: Fast, local task filtering for small task collections; no network latency or backend bottleneck
+**Performance Goals**: Task filtering is performed locally over the stored task collection. No separate performance target is specified.
 
 **Constraints**: Single-user app; no accounts or sync; 44x44 px controls; 4.5:1 normal text contrast and 3:1 large text contrast; offline-capable local storage
 
@@ -88,12 +88,12 @@ tests/
 │   ├── task-validation.test.ts
 │   └── task-store.test.ts
 ├── integration/
-│   └── task-flow.test.ts
-└── e2e/
-    └── task-list.spec.ts
+│   ├── task-list.test.tsx
+│   ├── task-maintenance.test.tsx
+│   └── task-persistence.test.tsx
 ```
 
-**Structure Decision**: A single frontend app is sufficient because the requirement is for one local task list with no backend or synchronization layer. The app will keep UI, task logic, and storage concerns separate under `src/features/tasks` and `src/lib/storage` while the tests are split between unit, integration, and end-to-end coverage.
+**Structure Decision**: A single frontend app is sufficient because the requirement is for one local task list with no backend or synchronization layer. The app will keep UI, task logic, and storage concerns separate under `src/features/tasks` and `src/lib/storage`, with behavior covered by unit and integration tests.
 
 ## Complexity Tracking
 

@@ -37,4 +37,9 @@ The value stored at the key is a JSON array of task objects.
 ## Validation behavior
 
 - Empty or whitespace-only titles are rejected before saving.
+- Valid titles are stored as entered, including surrounding whitespace.
+- If the key is absent, the repository loads an empty task collection.
+- If the stored value is not valid JSON, is not an array, or contains an invalid task or duplicate id, loading fails with a user-visible error. The repository must preserve the stored value and must not silently return an empty collection.
+- If reading from localStorage fails, loading fails with a user-visible error.
+- While loading has failed, task changes must be unavailable so the application cannot overwrite the unreadable or invalid stored value.
 - A failed save must be surfaced to the user as an error and must not be reported as success.

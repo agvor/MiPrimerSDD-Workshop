@@ -42,4 +42,8 @@
 ### 5. Persistence and accessibility
 - Close the application or refresh the browser.
 - Confirm all saved tasks remain available and the last saved status is preserved.
-- Verify controls are at least 44x44 px, text contrast meets the accessibility target, and the layout remains usable on narrow and wide screens.
+- Verify the persistence tests cover missing storage as an empty collection, and malformed, invalid, or unreadable storage as a visible load error that preserves stored data and prevents task changes.
+- Confirm the list header and browser window title both display "Curso-PSWE-07".
+- Verify the light background, single sans-serif font, accent color usage, and larger, bolder titles.
+- At 375x667 and 1440x900 viewport sizes, verify both screens remain usable without horizontal scrolling and all required actions remain available.
+- Measure interactive targets to confirm each is at least 44x44 px; verify normal text contrast is at least 4.5:1 and large text contrast is at least 3:1.
