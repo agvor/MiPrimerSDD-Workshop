@@ -37,3 +37,10 @@ No es necesario implementar la aplicación en este taller.
 - `requirements/`: especificación inicial.
 - `activities/`: guía de trabajo.
 - `deliverables/`: resultados de los estudiantes.
+
+## Herramientas Spec Kit
+
+Los comandos de soporte de Spec Kit usan Python 3 y funcionan en Linux, WSL y Windows.
+Desde la raíz del repositorio, ejecútalos mediante los scripts Bash de `.specify/scripts/bash/`;
+por ejemplo, `bash .specify/scripts/bash/resolve-template.sh constitution-template --json`.
+PyYAML solo es necesario cuando se resuelven plantillas de presets que declaran `preset.yml`.

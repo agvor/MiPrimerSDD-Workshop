@@ -3,6 +3,12 @@
   "version": "1.2.1",
   "installed_at": "2026-10-22T22:49:58.011312+00:00",
   "files": {
+    ".specify/scripts/bash/check-prerequisites.sh": "6bf97f412331764dd4dcf728089518c1a449dbb7b13e220d61cda5db134c9ab0",
+    ".specify/scripts/bash/create-new-feature.sh": "2aa9b47e0e7ddaa1b523c381182ca292c5780091294a63d143fd5ec6a82f65e6",
+    ".specify/scripts/bash/resolve-template.sh": "691f9724e5ee000e56902b687a001f3f6d4cd6f99f2890e64a24cad0d3c30842",
+    ".specify/scripts/bash/setup-plan.sh": "e2e9a0e20aa08fe501a32b37d569e3e2c4c4eed35e040727778dff84840a1b9b",
+    ".specify/scripts/bash/setup-tasks.sh": "a646ba6bfb38f4a18c8988a2c877660f0236626c0d541e9f03405abb7926cfb2",
+    ".specify/scripts/python/speckit.py": "24ef938ffa46bff1bf0b5c977d757368cf78c36cb662cdabe4e6a6843cc445c3",
     ".specify/scripts/powershell/check-prerequisites.ps1": "74fd947a6812c8b14159f393772e89278762165986f947aa0272ac8876b6c0f0",
     ".specify/scripts/powershell/common.ps1": "9837a02a1ca9e61a16a1ff7ec7429c95d8e1c87ec49400cc2807133bb89a5317",
     ".specify/scripts/powershell/create-new-feature.ps1": "481c7368541a816b1679e5ed65fa9e5aea84b09f8be3a02ff8a340e3b48dd58a",
