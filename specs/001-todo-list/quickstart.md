@@ -22,8 +22,8 @@ Use the following explicit design baseline so the visual requirements are verifi
 - Accent color: one primary accent used for primary actions and the active filter, chosen from an accessible blue or teal range such as `#2563EB`.
 - Text hierarchy: page titles and section headers are larger and bolder than task titles and description text; use a clear visual scale with title text at least 1.5rem and body text at 1rem.
 - Status treatment: completed tasks are rendered with a muted text color and a strike-through title, while pending tasks keep the normal foreground color.
-- Focus and hit target: all interactive controls must be at least 44x44 px and not rely on a 1px border to be clickable.
-- Contrast: normal text must be at least 4.5:1; large text must be at least 3:1; the accent color and neutral text must meet those thresholds in both light and filtered states.
+- Focus and hit target: all interactive controls must measure at least 44x44 CSS px and not rely on a 1px border to be clickable.
+- Contrast: normal text must be at least 4.5:1; large text must be at least 3:1. For this check, large text is at least 24 CSS px, or at least 18.66 CSS px when bold. The accent color and neutral text must meet those thresholds in every applicable state.
 - Layout: both screens remain usable at 375x667 and 1440x900 without horizontal scrolling; content stacks cleanly and actions remain reachable.
 
 ## Usability test protocol
@@ -35,7 +35,7 @@ Use a short first-time-user study to verify the measurable criteria in SC-001 th
 - Record completion success, time to completion, and whether the user reached the correct list or detail state without prompting.
 - For SC-001, SC-002, and SC-004, treat the task as successful only when the participant completes the step without assistance and within the stated time window.
 - For SC-006, ask each participant to answer yes/no on whether task status, active filter, validation messages, and delete confirmation are clear; report `yes / total` as the numerator/denominator in the final results.
-- Record accessibility checks using browser devtools or a contrast checker: verify the required contrast ratios and 44x44 px interactive target sizes, then confirm the app remains usable at both mobile and desktop viewports.
+- Record accessibility checks at both viewport sizes for the list, detail, edit, and delete-confirmation states. Measure each interactive element's rendered width and height in browser devtools; each must be at least 44 CSS px. For each distinct text/background color pair, use a WCAG relative-luminance contrast checker; check normal text at 4.5:1 and large text (at least 24 CSS px, or at least 18.66 CSS px when bold) at 3:1. Confirm neither viewport has horizontal scrolling and all required actions are reachable.
 - Include an error-path check for malformed or unreadable storage data and record whether the app communicates the problem without presenting a false success state.
 
 ## Validation scenarios
@@ -55,8 +55,8 @@ Use a short first-time-user study to verify the measurable criteria in SC-001 th
 ### 3. Filter and empty states
 - Add a mix of pending and done tasks.
 - Switch between `All`, `Pending`, and `Done` filters and confirm only matching tasks are shown.
-- Clear the task list and verify the no-tasks empty state is visible.
-- Apply a filter with no matches and confirm the no-matching-tasks empty state is displayed.
+- Clear the task list and verify “No tasks yet. Add a task to get started.” is visible.
+- Apply a filter with no matches and confirm “No tasks match this filter.” is displayed without implying that tasks were deleted.
 
 ### 4. Validate delete flow
 - Open a task and select Delete.
@@ -70,5 +70,6 @@ Use a short first-time-user study to verify the measurable criteria in SC-001 th
 - Verify the persistence tests cover missing storage as an empty collection, and malformed, invalid, or unreadable storage as a visible load error that preserves stored data and prevents task changes.
 - Confirm the list header and browser window title both display "Curso-PSWE-07".
 - Verify the light background, single sans-serif font, accent color usage, and larger, bolder titles.
-- At 375x667 and 1440x900 viewport sizes, verify both screens remain usable without horizontal scrolling and all required actions remain available.
-- Measure interactive targets to confirm each is at least 44x44 px; verify normal text contrast is at least 4.5:1 and large text contrast is at least 3:1.
+- At 375x667 and 1440x900 CSS-pixel viewport sizes, inspect the list, detail, edit, and delete-confirmation states. Verify both screens remain usable without horizontal scrolling and all required actions remain available.
+- Measure each rendered interactive target's width and height in browser devtools; each must be at least 44x44 CSS px. Using a WCAG contrast checker, verify every distinct text/background pair is at least 4.5:1 for normal text and 3:1 for large text (at least 24 CSS px, or at least 18.66 CSS px when bold).
+- Scope check: inspect the list, detail, add/edit forms, and navigation to confirm no account, category, due-date, priority, search, or synchronization UI or flow is exposed.

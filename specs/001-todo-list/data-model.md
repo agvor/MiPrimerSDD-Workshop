@@ -8,9 +8,6 @@
 | title | string | Yes | Must be non-empty after trimming whitespace; preserve the entered value when valid. |
 | description | string | No | Optional; empty string allowed and shown as “No description”. |
 | status | enum | Yes | `pending` or `done`; default is `pending` for new tasks. |
-| createdAt | string | No | ISO timestamp for tracking creation ordering. |
-| updatedAt | string | No | ISO timestamp for the last save operation. |
-
 ## Relationships
 
 - A task belongs to the single-user list maintained by the app; no user, category, or sync models are included.
@@ -41,4 +38,5 @@
 ### UI rendering rules
 - Task rows display a status indicator and title.
 - Done titles appear struck through and muted.
-- Empty state messaging differs between “no tasks at all” and “no tasks match the active filter”.
+- When there are no tasks, show “No tasks yet. Add a task to get started.”
+- When the active filter has no matches, show “No tasks match this filter.” without implying that tasks were deleted.

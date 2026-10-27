@@ -2,7 +2,7 @@
 
 ## Scope
 
-This app persists task data locally in the browser. There is no server API or synchronization layer.
+This app persists task data locally in the browser. There is no server API or synchronization layer. Stored tasks remain available after normal close/reopen in the same browser profile; offline loading of the app itself is not required.
 
 ## Storage key
 
@@ -18,9 +18,7 @@ The value stored at the key is a JSON array of task objects.
     "id": "task-123",
     "title": "Write project update",
     "description": "Share the status with the team.",
-    "status": "pending",
-    "createdAt": "2026-10-26T10:00:00.000Z",
-    "updatedAt": "2026-10-26T10:00:00.000Z"
+    "status": "pending"
   }
 ]
 ```

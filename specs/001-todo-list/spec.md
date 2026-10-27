@@ -20,15 +20,15 @@ As a user, I want to add tasks and find them in a list so I can keep track of th
 
 **Acceptance Scenarios**:
 
-1. **Given** the To-Do List screen has no tasks, **When** the user opens it, **Then** a friendly empty state and a clearly visible Add task action are shown.
-2. **Given** the user chooses Add task, **When** they enter a non-empty title and optionally a description and save, **Then** a pending task is created and appears in the list.
+1. **Given** the To-Do List screen has no tasks, **When** the user opens it, **Then** the message “No tasks yet. Add a task to get started.” and a clearly visible Add task action are shown.
+2. **Given** the user chooses Add task, **When** they enter a non-empty title and optionally a description and save, **Then** a task with Pending status is created and appears in the list.
 3. **Given** a task has been added, **When** the user selects its row, **Then** its To-Do Detail screen opens.
 4. **Given** the list contains pending and done tasks, **When** the user selects All, Pending, or Done, **Then** the list shows all tasks, only pending tasks, or only done tasks, respectively, and highlights the active filter.
-5. **Given** no tasks match the selected filter, **When** the filtered list is shown, **Then** a friendly empty state explains that there are no matching tasks.
+5. **Given** no tasks match the selected filter, **When** the filtered list is shown, **Then** the message “No tasks match this filter.” is shown without implying that tasks were deleted.
 6. **Given** a task is done, **When** it appears in the list, **Then** its title is struck through and muted, and a status indicator remains visible.
 7. **Given** the application is viewed at a 375x667 mobile viewport or a 1440x900 desktop viewport, **When** either screen is displayed, **Then** the app name appears in the list header and application/window title, the layout remains usable without horizontal scrolling, and all required actions remain available.
 8. **Given** either screen is displayed, **When** the user views its content, **Then** the light background, single sans-serif font, single accent color for primary actions and the active filter, and larger, bolder titles are consistently applied.
-9. **Given** either screen is displayed, **When** the user measures its text and interactive targets, **Then** normal-sized text has at least 4.5:1 contrast, large text has at least 3:1 contrast, and interactive targets measure at least 44x44 px.
+9. **Given** either screen is displayed, **When** the user measures its text and interactive targets, **Then** normal-sized text has at least 4.5:1 contrast, large text (at least 24 CSS px, or at least 18.66 CSS px when bold) has at least 3:1 contrast, and interactive targets measure at least 44x44 CSS px.
 
 ### User Story 2 - Review and maintain a task (Priority: P1)
 
@@ -84,7 +84,7 @@ As a user, I want my task list and changes to remain available after closing and
 - **FR-005**: A newly created task MUST have Pending status.
 - **FR-006**: Each task row MUST show a status indicator and title; a Done task's title MUST be struck through and shown in a muted color.
 - **FR-007**: The list MUST provide All, Pending, and Done filters, highlight the active filter, and show only matching tasks.
-- **FR-008**: The list MUST show a friendly empty state when there are no tasks and a friendly no-matching-tasks state when the active filter returns no results.
+- **FR-008**: When the task collection is empty, the list MUST show “No tasks yet. Add a task to get started.” When the active filter returns no results, it MUST show “No tasks match this filter.” without implying that tasks were deleted.
 - **FR-009**: Selecting a task row MUST open the detail screen for that task.
 - **FR-010**: The detail screen MUST show the task title, its description or muted “No description” text, its Done or Pending status, and a back control.
 - **FR-011**: The detail screen MUST provide Edit, a status-toggle action labeled Mark as done or Mark as not done according to the current status, and Delete.
@@ -94,7 +94,7 @@ As a user, I want my task list and changes to remain available after closing and
 - **FR-015**: The application MUST clearly report when a task change cannot be saved and MUST NOT present an unsuccessful save as successful.
 - **FR-016**: The application/window title and the To-Do List header MUST display “Curso-PSWE-07”.
 - **FR-017**: The interface MUST use a light background, generous whitespace, one sans-serif font family, and a single accent color for primary actions and the active filter; titles MUST be larger and bolder than descriptions.
-- **FR-018**: Text MUST meet a contrast ratio of at least 4.5:1 for normal-sized text and 3:1 for large text; interactive targets MUST be at least 44x44 px.
+- **FR-018**: Text MUST meet a contrast ratio of at least 4.5:1 for normal-sized text and 3:1 for large text; for this requirement, large text means at least 24 CSS px, or at least 18.66 CSS px when bold. Interactive targets MUST be at least 44x44 CSS px.
 - **FR-019**: Both screens MUST adapt for mobile and desktop layouts while remaining usable.
 - **FR-020**: The application MUST NOT include accounts, categories, due dates, priorities, search, or synchronization.
 - **FR-021**: If the saved task collection cannot be read or fails validation, the application MUST report a load error, preserve the stored value, and prevent task changes from overwriting that data.
@@ -113,7 +113,7 @@ SC-001, SC-002, SC-004, and SC-006 are post-launch usability outcome targets, no
 - **SC-002**: At least 90% of users can change a task's status and find it with the corresponding filter without assistance within one minute.
 - **SC-003**: In all acceptance tests, every successfully saved addition, edit, status change, and deletion is reflected correctly after the application is closed and reopened.
 - **SC-004**: At least 90% of users can edit a task and complete or cancel a confirmed deletion without assistance within two minutes.
-- **SC-005**: At 375x667 and 1440x900 viewports, every interactive target measures at least 44x44 px, normal text has at least 4.5:1 contrast and large text at least 3:1, and both screens remain usable without horizontal scrolling.
+- **SC-005**: At 375x667 and 1440x900 CSS-pixel viewports, every interactive target measures at least 44x44 CSS px, normal text has at least 4.5:1 contrast and large text at least 3:1 (large text is at least 24 CSS px, or at least 18.66 CSS px when bold), and both screens remain usable without horizontal scrolling.
 - **SC-006**: At least 90% of usability-test participants report that task status, the active filter, validation messages, and delete confirmation are clear.
 
 ## Assumptions

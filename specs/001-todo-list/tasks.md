@@ -21,7 +21,7 @@
 **Purpose**: Establish shared test infrastructure and task/repository contracts needed by all stories.
 
 - [ ] T002 [P] Configure Vitest, jsdom, and Testing Library in `vite.config.ts` and `tests/setup.ts`
-- [ ] T003 [P] Define the `Task`, `TaskStatus`, and `TaskFilter` types in `src/features/tasks/models/task.ts` with a unique string id, a string title that must be non-empty after trimming whitespace but preserves the entered value, an optional description that allows an empty string, a `pending` or `done` status defaulting to `pending`, and optional ISO timestamp strings for `createdAt` and `updatedAt`
+- [ ] T003 [P] Define the `Task`, `TaskStatus`, and `TaskFilter` types in `src/features/tasks/models/task.ts` with a unique string id, a string title that must be non-empty after trimming whitespace but preserves the entered value, an optional description that allows an empty string, and a `pending` or `done` status defaulting to `pending`
 - [ ] T004 Define the replaceable task repository interface in `src/features/tasks/task-repository.ts` for loading and saving the full task collection
 
 **Checkpoint**: Shared task types, repository boundary, and test runner are ready before story implementation.
@@ -37,16 +37,17 @@
 ### Tests for User Story 1
 
 - [ ] T005 [P] [US1] Add unit tests for rejecting empty or whitespace-only titles and accepting non-empty titles in `tests/unit/task-validation.test.ts`
-- [ ] T006 [P] [US1] Add list acceptance tests for the no-task and no-match empty states, task creation with title preservation, task-row opening, all three filters, active-filter indication, completed-row styling, app/window naming, light background, single font and accent color, and title hierarchy in `tests/integration/task-list.test.tsx`
+- [ ] T006 [P] [US1] Add list acceptance tests for the exact no-task and no-match messages, task creation with title preservation and Pending status, task-row opening, all three filters, active-filter indication, completed-row styling, app/window naming, light background, single font and accent color, title hierarchy, and an assertion that no account, category, due-date, priority, search, or sync UI/flow is exposed in `tests/integration/task-list.test.tsx`
+- [ ] T006A [P] [US1] Add unit tests for task collection loading, creation with Pending status, filter results, and selected-task state in `tests/unit/task-list-actions.test.ts`
 
 ### Implementation for User Story 1
 
 - [ ] T007 [US1] Implement required-title validation in `src/features/tasks/validation/task-validation.ts` so blank or whitespace-only titles are rejected with a user-facing validation message
 - [ ] T008 [US1] Implement the initial in-memory `TaskRepository` adapter in `src/features/tasks/in-memory-task-repository.ts` for the working list increment
-- [ ] T009 [US1] Implement task loading, creation with `pending` status, list filtering, and task selection in `src/features/tasks/hooks/use-tasks.ts`
+- [ ] T009 [US1] After T006A's tests are written and confirmed failing, implement task loading, creation with `pending` status, list filtering, and task selection in `src/features/tasks/hooks/use-tasks.ts`
 - [ ] T010 [US1] Implement the reusable add-task form with title validation, preservation of valid entered titles, and optional description in `src/features/tasks/components/task-form.tsx`
 - [ ] T011 [US1] Implement the task list, visible Add task action, status indicators, All/Pending/Done filters, and distinct no-task/no-match empty states in `src/app/screens/task-list-screen.tsx`
-- [ ] T012 [US1] Wire the list and task-opening navigation, display “Curso-PSWE-07” in the list header and window title, and implement the light responsive visual system and specified contrast and 44x44 px target sizes in `src/app/app.tsx`, `src/styles/app.css`, and `index.html`
+- [ ] T012 [US1] Wire the list and task-opening navigation, display “Curso-PSWE-07” in the list header and window title, and implement the light responsive visual system and specified contrast and 44x44 CSS px target sizes in `src/app/app.tsx`, `src/styles/app.css`, and `index.html`
 
 **Checkpoint**: The list increment is independently testable for adding, opening, filtering, empty states, and task-row appearance.
 
@@ -98,7 +99,7 @@
 
 **Purpose**: Align the validation guide with the finished application and verify the complete feature.
 
-- [ ] T023 Update setup commands and document the lint check alongside manual acceptance checks matching US1 scenarios 7-9 for app/window naming, visual hierarchy, 375x667 and 1440x900 layouts without horizontal scrolling, contrast, and 44x44 px targets, plus persistence, malformed-storage handling, and feature validation steps in `specs/001-todo-list/quickstart.md`
+- [ ] T023 Update setup commands and document the lint check alongside manual acceptance checks for US1 scenarios 7-9, exact empty-state messages, absence of the FR-020 excluded features, app/window naming, visual hierarchy, 375x667 and 1440x900 layouts without horizontal scrolling, the FR-018 large-text cutoff and contrast/target-size measurement procedure, persistence, malformed-storage handling, and feature validation steps in `specs/001-todo-list/quickstart.md`
 - [ ] T024 Run the configured lint, test, and build scripts from `package.json` and complete the validation scenarios in `specs/001-todo-list/quickstart.md`, resolving any failures
 
 ---
@@ -121,6 +122,7 @@
 ### Within Each User Story
 
 - Write and run the story's tests before its implementation tasks.
+- For US1, T006A must be written and confirmed failing before T009 begins; T009 also follows T007 and T008.
 - Complete validation and repository prerequisites before the task hook and UI integration that consume them.
 - Keep each story independently testable at its checkpoint.
 

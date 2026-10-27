@@ -6,7 +6,7 @@
 
 ## Summary
 
-Build a single-user to-do list app with a list screen and a detail screen. Editing is a mode of the detail screen, not a third screen. The implementation will use a minimal client-side web stack with local persistence so tasks remain available after app close/reopen without introducing sync, users, or backend services.
+Build a single-user to-do list app with a list screen and a detail screen. Editing is a mode of the detail screen, not a third screen. The implementation will use a minimal client-side web stack with local persistence so tasks remain available after app close/reopen without introducing sync, users, or backend services. The task data is local to the browser profile; offline loading of the app itself is not required.
 
 ## Technical Context
 
@@ -24,7 +24,7 @@ Build a single-user to-do list app with a list screen and a detail screen. Editi
 
 **Performance Goals**: Task filtering is performed locally over the stored task collection. No separate performance target is specified.
 
-**Constraints**: Single-user app; no accounts or sync; 44x44 px controls; 4.5:1 normal text contrast and 3:1 large text contrast; offline-capable local storage
+**Constraints**: Single-user app; no accounts or sync; task data stored in browser localStorage and retained across normal close/reopen in the same browser profile; offline app-shell execution is not required; 44x44 CSS px controls; 4.5:1 normal text contrast and 3:1 large text contrast, using the large-text cutoff defined in FR-018
 
 **Scale/Scope**: One local task list, two screens, no categories, no dates, no priorities, and no search features
 
